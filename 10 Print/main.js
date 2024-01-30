@@ -6,7 +6,6 @@ let y = 0;
 let spacing = 30;
 
 function draw(){
-    console.log("Here");
     if(Math.random() < 0.5){
         ctx.beginPath();
         ctx.moveTo(x, y);
@@ -26,7 +25,6 @@ function draw(){
         x = 0;
         y += spacing;
         if(y > canvas.height - spacing){
-            console.log("Finished in theory");
             clearInterval(intervalId);
         }
     }

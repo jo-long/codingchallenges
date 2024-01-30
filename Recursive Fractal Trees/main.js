@@ -13,7 +13,7 @@ slider.addEventListener("input", function(e){
 draw();
 
 function draw(){
-    ctx.fillStyle = "gray";
+    ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.translate(300, canvas.height);
     branch(150);

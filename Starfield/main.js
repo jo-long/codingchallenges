@@ -2,20 +2,20 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 let stars = [];
-let mouseX = 0;
-
+let step = 1;
 let speed = 1;
 
-for(let i = 0; i < 800; i++){
+const slider = document.getElementById("myRange");
+slider.addEventListener("input", function(e){
+    step = e.target.value;
+});
+
+for(let i = 0; i < 2000; i++){
     stars[i] = new Star(canvas.width, canvas.height);
 }
 
-canvas.addEventListener("mousemove", function(e){
-    mouseX = e.clientX - e.target.getBoundingClientRect().left;
-});
-
 function draw(){
-    speed = (mouseX * 50) / canvas.width;
+    speed = (step * 50) / canvas.width;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
