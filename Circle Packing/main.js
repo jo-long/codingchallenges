@@ -7,13 +7,15 @@ let imgH;
 let imgW;
 let intervalId;
 let img = new Image();
-img.src = "cat.jpg";
+img.src = "kitten.jpg";
 
 img.onload = () => {
-    ctx.drawImage(img, 0, 0);
-    imageData = ctx.getImageData(0, 0, canvas.width / 2, canvas.height);
     imgH = img.height;
     imgW = img.width;
+    canvas.width = imgW * 2;
+    canvas.height = imgH;
+    ctx.drawImage(img, 0, 0, imgW, imgH);
+    imageData = ctx.getImageData(0, 0, imgW, imgH);
     intervalId = setInterval(draw, 100);
 };
 
