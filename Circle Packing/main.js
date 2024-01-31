@@ -27,7 +27,7 @@ function draw(){
         attempts++;
 
         if(attempts > 1000){
-            //stop setInterval
+            clearInterval(intervalId);
             break;
         }
     }
@@ -85,3 +85,4 @@ function createCircle(){
         }
     }
 }
+let intervalId = setInterval(draw, 100);
