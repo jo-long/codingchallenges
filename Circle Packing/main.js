@@ -79,15 +79,15 @@ function createCircle(){
             valid = false;
             break;
         }
+    }
 
-        if(valid){
-            let index = (Math.floor(x) + Math.floor(y) * img.width) * 4;
-            let r = imageData.data[index];
-            let g = imageData.data[index + 1];
-            let b = imageData.data[index + 2];
-            return new Circle(x, y, `rgb(${r}, ${g}, ${b})`);
-        }else{
-            return null;
-        }
+    if(valid){
+        let index = (Math.floor(x) + Math.floor(y) * img.width) * 4;
+        let r = imageData.data[index];
+        let g = imageData.data[index + 1];
+        let b = imageData.data[index + 2];
+        return new Circle(x, y, `rgb(${r}, ${g}, ${b})`);
+    }else{
+        return null;
     }
 }
