@@ -5,6 +5,7 @@ let circles = [];
 let imageData;
 let imgH;
 let imgW;
+let intervalId;
 let img = new Image();
 img.src = "cat.jpg";
 
@@ -13,6 +14,7 @@ img.onload = () => {
     imageData = ctx.getImageData(0, 0, canvas.width / 2, canvas.height);
     imgH = img.height;
     imgW = img.width;
+    intervalId = setInterval(draw, 100);
 };
 
 function draw(){
@@ -89,5 +91,3 @@ function createCircle(){
         }
     }
 }
-
-let intervalId = setInterval(draw, 100);
