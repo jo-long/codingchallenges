@@ -42,7 +42,7 @@ function draw(){
         let circle = circles[i];
 
         if(circle.growing){
-            if(circle.touchingEdge()){
+            if(circle.touchingEdge(imgW, imgH)){
                 circle.growing = false;
             }else{
                 for(let j = 0; j < circles.length; j++){
