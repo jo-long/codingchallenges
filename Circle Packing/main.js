@@ -54,7 +54,7 @@ function draw(){
             }
         }
 
-        circle.show();
+        circle.show(ctx);
         circle.grow();
     }
 }
