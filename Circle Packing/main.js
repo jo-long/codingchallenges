@@ -3,12 +3,16 @@ const ctx = canvas.getContext("2d");
 
 let circles = [];
 let imageData;
+let imgH;
+let imgW;
 let img = new Image();
 img.src = "cat.jpg";
 
 img.onload = () => {
     ctx.drawImage(img, 0, 0);
     imageData = ctx.getImageData(0, 0, canvas.width / 2, canvas.height);
+    imgH = img.height;
+    imgW = img.width;
 };
 
 function draw(){
@@ -60,8 +64,8 @@ function draw(){
 }
 
 function createCircle(){
-    let x = Math.random() * (img.width / 2);
-    let y = Math.random() * img.height;
+    let x = Math.random() * imgW;//(canvas.width / 2);
+    let y = Math.random() * imgH;//canvas.height;
 
     let valid = true;
 
@@ -85,4 +89,5 @@ function createCircle(){
         }
     }
 }
+
 let intervalId = setInterval(draw, 100);
