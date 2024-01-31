@@ -66,7 +66,7 @@ function draw(){
 }
 
 function createCircle(){
-    let x = Math.random() * imgW;//(canvas.width / 2);
+    let x = (Math.random() * imgW) + imgW;//(canvas.width / 2);
     let y = Math.random() * imgH;//canvas.height;
 
     let valid = true;
