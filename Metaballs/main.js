@@ -6,7 +6,7 @@ let data = imageData.data;
 
 let blobs = [];
 
-for(let i = 0; i < 10; i++){
+for(let i = 0; i < 15; i++){
     blobs.push(new Blob(Math.random() * canvas.width, Math.random() * canvas.height));
 }
 
