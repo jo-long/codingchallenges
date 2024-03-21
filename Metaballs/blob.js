@@ -5,7 +5,7 @@ class Blob{
         let angle = Math.random() * (2 * Math.PI);
         this.xSpeed = Math.floor(Math.random() * (5 - 2) + 2) * Math.cos(angle); 
         this.ySpeed = Math.floor(Math.random() * (5 - 2) + 2) * Math.sin(angle); 
-        this.r = Math.floor(Math.random() * (140 - 120) + 120);
+        this.r = Math.floor(Math.random() * (315 - 270) + 270);
     }
 
     update(width, height){
