@@ -1,6 +1,11 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+let minDimension = window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth;
+minDimension = minDimension >= 600 ? 600 : minDimension - (minDimension % 10) - 10;
+canvas.width = minDimension;
+canvas.height = minDimension;
+
 let numbers = [];
 let count = 1;
 let sequence = [];
@@ -14,6 +19,8 @@ let biggest = 0;
 
 numbers[index] = true;
 sequence.push(index);
+
+
 
 // class Arc{
 //     constructor(start, end, dir){
@@ -34,6 +41,15 @@ sequence.push(index);
 //         ctx.stroke();
 //     }
 // }
+
+window.addEventListener("resize", (e) =>{
+    let newMinDimension = window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth;
+    newMinDimension = newMinDimension >= 600 ? 600 : newMinDimension - (newMinDimension % 10) - 10;
+    if(newMinDimension == minDimension) return;
+    minDimension = newMinDimension;
+    canvas.width = minDimension;
+    canvas.height = minDimension;
+});
 
 function step(){
     let next = index - count;
@@ -60,7 +76,7 @@ function draw(){
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     step();
-    ctx.font = "40px monospace"
+    setFontSize(40, canvas.width, `Biggest number is ${biggest}`);
     ctx.textAlign = "center";
     ctx.fillStyle = "white";
     ctx.fillText(`Biggest number is ${biggest}`, canvas.width/2, 9 * canvas.height/10);
@@ -70,6 +86,16 @@ function draw(){
 
     for(let arc of arcs){
         arc.show(ctx);
+    }
+}
+
+function setFontSize(currentSize, widthRestriction, text){
+    ctx.font = `${currentSize}px monospace`;
+    let width = ctx.measureText(text).width;
+    while(width >= widthRestriction){
+        currentSize-=5;
+        ctx.font = `${currentSize}px monospace`;
+        width = ctx.measureText(text).width;
     }
 }
 

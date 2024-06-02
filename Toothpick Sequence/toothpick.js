@@ -3,6 +3,7 @@ class Toothpick{
         this.dir = dir;
         this.len = len;
         this.isNew = true;
+        this.justSpawnedChildren = false;
         if(dir == 1){
             this.ax = x - len / 2;
             this.bx = x + len/2;

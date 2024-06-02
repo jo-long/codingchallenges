@@ -9,9 +9,20 @@ class Blob{
     }
 
     update(width, height){
-        this.x += this.xSpeed;
-        this.y += this.ySpeed;
-        if(this.x > width || this.x < 0) this.xSpeed *= -1;
-        if(this.y > height || this.y < 0) this.ySpeed *= -1;
+        this.x = this.#clamp(0, width, this.xSpeed + this.x);
+        this.y = this.#clamp(0, height, this.ySpeed + this.y);
+        if(this.x >= width || this.x <= 0) this.xSpeed *= -1;
+        if(this.y >= height || this.y <= 0) this.ySpeed *= -1;
+    }
+
+    resize(wRatio, hRatio){
+        this.x *= wRatio;
+        this.y *= hRatio;
+    }
+
+    #clamp(min, max, value){
+        if(value < min) return min;
+        if(value > max) return max;
+        return value;
     }
 }

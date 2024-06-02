@@ -1,6 +1,23 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+
+let minDimension = window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth;
+minDimension = minDimension >= 600 ? 600 : minDimension - (minDimension % 10);
+canvas.width = minDimension;
+canvas.height = minDimension;
+
 maxIteration = -1;
+
+window.addEventListener("resize", (e) =>{
+    let newMinDimension = window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth;
+    newMinDimension = newMinDimension >= 600 ? 600 : newMinDimension - (newMinDimension % 10);
+    if(newMinDimension == minDimension) return;
+    minDimension = newMinDimension;
+    canvas.width = minDimension;
+    canvas.height = minDimension;
+    if(maxIteration == -1) return;
+    draw(0, 0, canvas.width, canvas.height, 0);
+});
 
 canvas.addEventListener("click", (e) =>{
     ctx.clearRect(0, 0, canvas.width, canvas.height);

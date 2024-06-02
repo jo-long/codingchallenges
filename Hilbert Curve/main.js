@@ -1,22 +1,46 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+let minDimension = window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth;
+minDimension = minDimension >= 600 ? 600 : minDimension - (minDimension % 10);
+canvas.width = minDimension;
+canvas.height = minDimension;
+
 let order = 8;
 let N = Math.floor(Math.pow(2, order));
 let total = N * N;
-
-let path = [];
-let counter = 0;
 let step = 12;
-counter += step;
 
-for(let i = 0; i < total; i++){
-    path[i] = hilbert(i);
-    let len = canvas.width / N;
-    path[i][0] = path[i][0] * len;
-    path[i][1] = path[i][1] * len;
-    path[i][0] = path[i][0] + len/2;
-    path[i][1] = path[i][1] + len/2;
+let path, counter;
+initialize();
+
+window.addEventListener("resize", (e) =>{
+    let newMinDimension = window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth;
+    newMinDimension = newMinDimension >= 600 ? 600 : newMinDimension - (newMinDimension % 10);
+    if(newMinDimension == minDimension) return;
+    minDimension = newMinDimension;
+    canvas.width = minDimension;
+    canvas.height = minDimension;
+    let prevCounter = counter;
+    initialize();
+    clearInterval(intervalId);
+    resizeDraw(prevCounter);
+    intervalId = setInterval(draw, 33.33);
+});
+
+function initialize(){
+    path = [];
+    counter = 0;
+    counter += step;
+
+    for(let i = 0; i < total; i++){
+        path[i] = hilbert(i);
+        let len = canvas.width / N;
+        path[i][0] = path[i][0] * len;
+        path[i][1] = path[i][1] * len;
+        path[i][0] = path[i][0] + len/2;
+        path[i][1] = path[i][1] + len/2;
+    }
 }
 
 function draw(){
@@ -27,9 +51,7 @@ function draw(){
     }
     let offset = ((Math.ceil(counter / step) - 1) * step) - 1;
     offset = offset < 0 ? 0 : offset;
-    //console.log(`Counter is ${counter} and path length is ${path.length}`);
     for(let i = 1 + offset; i < counter; i++){
-        //console.log(`i is ${i}`);
         let h = i * 360 / path.length;
         ctx.beginPath();
         ctx.moveTo(path[i][0], path[i][1]);
@@ -78,4 +100,8 @@ function hilbert(i){
     return v;
 }
 
-setInterval(draw, 33.33);
+function resizeDraw(iterations){
+    while (counter <= iterations) draw();
+}
+
+let intervalId = setInterval(draw, 33.33);

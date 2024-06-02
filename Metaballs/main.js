@@ -1,6 +1,11 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+let minDimension = window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth;
+minDimension = minDimension >= 400 ? 400 : minDimension - (minDimension % 10);
+canvas.width = minDimension;
+canvas.height = minDimension;
+
 let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 let data = imageData.data;
 
@@ -10,7 +15,20 @@ for(let i = 0; i < 15; i++){
     blobs.push(new Blob(Math.random() * canvas.width, Math.random() * canvas.height));
 }
 
-
+window.addEventListener("resize", (e) =>{
+    let newMinDimension = window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth;
+    newMinDimension = newMinDimension >= 400 ? 400 : newMinDimension - (newMinDimension % 10);
+    if(newMinDimension == minDimension) return;
+    clearInterval(intervalId);
+    minDimension = newMinDimension;
+    resizeBlobs();
+    canvas.width = minDimension;
+    canvas.height = minDimension;
+    imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    data = imageData.data;
+    draw();
+    intervalId = setInterval(draw, 33.33);
+});
 
 function draw(){
     for(let y = 0; y < canvas.height; y++){
@@ -47,4 +65,10 @@ function hsl2rgb(h,s,l)
    return [f(0),f(8),f(4)];
 }
 
-setInterval(draw, 33)
+function resizeBlobs(){
+    const wRatio = minDimension / canvas.width;
+    const hRatio = minDimension / canvas.height;
+    for(let blob of blobs) blob.resize(wRatio, hRatio);
+}
+
+let intervalId = setInterval(draw, 33.33);
