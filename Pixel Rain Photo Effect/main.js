@@ -9,8 +9,8 @@ let mappedImage = [];
 
 
 image.addEventListener("load", function(){
-    canvas.width = image.naturalWidth *.5;
-    canvas.height = image.naturalHeight * .5;
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
     
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
     const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
