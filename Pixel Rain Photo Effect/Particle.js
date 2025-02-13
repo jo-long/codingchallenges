@@ -22,8 +22,8 @@ class Particle {
         this.pixX = Math.floor(this.x);
         this.speed = speed;//pixels[this.pixY][this.pixX];
         this.color = color;
-        const secondsPassed = (Date.now() - this.startTime) / 1000;
-        this.shouldRespawn = secondsPassed < this.lifeSpan;
+        //const secondsPassed = (Date.now() - this.startTime) / 1000;
+        this.shouldRespawn = true;//secondsPassed < this.lifeSpan;
         if(!this.shouldRespawn) this.movementIncrease+=.01;
         let movement = (2.5 - this.speed) + this.velocity;
 
