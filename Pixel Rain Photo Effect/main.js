@@ -2,7 +2,7 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 const image = new Image();
-image.src = "./images/dragon.jpeg";
+image.src = "./images/eagle.png";
 let particles = [];
 let numParticles = 20000;
 let mappedImage = [];
